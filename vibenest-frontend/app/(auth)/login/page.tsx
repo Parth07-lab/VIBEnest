@@ -8,8 +8,9 @@ import { ArrowRight, RefreshCw, AlertCircle } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
-  const login = useAuthStore((state) => state.login);
+  const { login, adminLogin } = useAuthStore();
 
+  const [role, setRole] = useState<'user' | 'admin'>('user');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -26,7 +27,8 @@ export default function LoginPage() {
     setError('');
 
     try {
-      const res = await fetch('/api/v1/auth/login', {
+      const endpoint = role === 'user' ? '/api/v1/auth/login' : '/api/v1/auth/admin/login';
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -34,9 +36,13 @@ export default function LoginPage() {
 
       const result = await res.json();
       if (result.success) {
-        // Save to Zustand
-        login(result.data.token, result.data.user);
-        router.push('/');
+        if (role === 'user') {
+          login(result.data.token, result.data.user);
+          router.push('/');
+        } else {
+          adminLogin(result.data.token, result.data.admin);
+          router.push('/admin');
+        }
       } else {
         setError(result.message || 'Invalid email or password.');
       }
@@ -62,6 +68,32 @@ export default function LoginPage() {
           </div>
         )}
 
+        {/* Role Selector Tabs */}
+        <div className="flex bg-white/5 p-1 rounded-md font-ui text-xs">
+          <button
+            type="button"
+            onClick={() => setRole('user')}
+            className={`flex-1 py-2.5 rounded font-bold uppercase tracking-wider transition-all duration-300 ${
+              role === 'user'
+                ? 'bg-white text-black shadow-lg'
+                : 'text-white/60 hover:text-white hover:bg-white/5'
+            }`}
+          >
+            User Login
+          </button>
+          <button
+            type="button"
+            onClick={() => setRole('admin')}
+            className={`flex-1 py-2.5 rounded font-bold uppercase tracking-wider transition-all duration-300 ${
+              role === 'admin'
+                ? 'bg-white text-black shadow-lg'
+                : 'text-white/60 hover:text-white hover:bg-white/5'
+            }`}
+          >
+            Admin Login
+          </button>
+        </div>
+
         <form onSubmit={handleSubmit} className="space-y-4 font-ui text-sm">
           <div className="space-y-1.5">
             <label className="text-xs uppercase font-bold text-white/70">Email Address</label>
@@ -69,7 +101,7 @@ export default function LoginPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="customer@vibenest.com"
+              placeholder={role === 'user' ? 'customer@vibenest.com' : 'admin@vibenest.com'}
               className="input-field"
               required
             />

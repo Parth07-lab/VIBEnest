@@ -256,25 +256,7 @@ export async function adminLogin(req: AuthenticatedRequest, res: Response) {
       return res.status(401).json({ success: false, message: 'Invalid admin credentials.' });
     }
 
-    // Check TOTP if enabled
-    if (adminUser.mfaSecret) {
-      if (!totpToken) {
-        return res.status(202).json({
-          success: true,
-          mfaRequired: true,
-          message: 'MFA is enabled. Please provide TOTP code.',
-        });
-      }
-
-      const isValidTotp = authenticator.verify({
-        token: totpToken,
-        secret: adminUser.mfaSecret,
-      }) || totpToken === '123456';
-
-      if (!isValidTotp) {
-        return res.status(401).json({ success: false, message: 'Invalid 2FA verification code.' });
-      }
-    }
+    // 2FA bypass: MFA check removed per user request
 
     // Create Admin Token
     const adminToken = jwt.sign(
