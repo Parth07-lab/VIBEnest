@@ -36,7 +36,7 @@ export default function AdminLoginPage() {
       const payload: any = { email, password };
       if (totpToken) payload.totpToken = totpToken;
 
-      const res = await fetch('http://localhost:5000/api/v1/auth/admin/login', {
+      const res = await fetch('/api/v1/auth/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

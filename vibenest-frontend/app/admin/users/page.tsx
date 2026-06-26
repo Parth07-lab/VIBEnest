@@ -17,7 +17,7 @@ export default function AdminUsersPage() {
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/v1/admin/users', {
+      const res = await fetch('/api/v1/admin/users', {
         headers: {
           'Authorization': `Bearer ${adminToken}`
         }
@@ -45,7 +45,7 @@ export default function AdminUsersPage() {
 
     setSubmittingId(userId);
     try {
-      const res = await fetch(`http://localhost:5000/api/v1/admin/users/${userId}/suspend`, {
+      const res = await fetch(`/api/v1/admin/users/${userId}/suspend`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${adminToken}`

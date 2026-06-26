@@ -15,7 +15,7 @@ export default function OrdersPage() {
   const fetchOrders = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/v1/orders', {
+      const res = await fetch('/api/v1/orders', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -40,7 +40,7 @@ export default function OrdersPage() {
   const handleCancelOrder = async (orderId: string) => {
     if (!confirm('Are you sure you want to cancel this order?')) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/v1/orders/${orderId}/cancel`, {
+      const res = await fetch(`/api/v1/orders/${orderId}/cancel`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`

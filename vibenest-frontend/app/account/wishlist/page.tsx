@@ -18,7 +18,7 @@ export default function WishlistPage() {
     async function fetchAllProducts() {
       setLoading(true);
       try {
-        const res = await fetch('http://localhost:5000/api/v1/products?limit=50');
+        const res = await fetch('/api/v1/products?limit=50');
         const result = await res.json();
         if (result.success) {
           // Filter products in local wishlist state

@@ -17,7 +17,7 @@ export default function AdminOrdersPage() {
   const fetchOrders = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/v1/admin/orders', {
+      const res = await fetch('/api/v1/admin/orders', {
         headers: {
           'Authorization': `Bearer ${adminToken}`
         }
@@ -42,7 +42,7 @@ export default function AdminOrdersPage() {
   const handleUpdateStatus = async (orderId: string, updates: { status?: string; paymentStatus?: string }) => {
     setUpdatingId(orderId);
     try {
-      const res = await fetch(`http://localhost:5000/api/v1/admin/orders/${orderId}`, {
+      const res = await fetch(`/api/v1/admin/orders/${orderId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

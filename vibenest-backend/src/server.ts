@@ -9,6 +9,10 @@ import app from './app.js';
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`[VibeNest Core API] Server successfully booted on port ${PORT}`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`[VibeNest Core API] Server successfully booted on port ${PORT}`);
+  });
+}
+
+export default app;

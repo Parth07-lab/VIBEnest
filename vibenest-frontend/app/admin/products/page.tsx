@@ -33,7 +33,7 @@ export default function AdminProductsPage() {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/v1/products?limit=100');
+      const res = await fetch('/api/v1/products?limit=100');
       const result = await res.json();
       if (result.success) {
         setProducts(result.data);
@@ -48,7 +48,7 @@ export default function AdminProductsPage() {
   useEffect(() => {
     async function fetchCategories() {
       try {
-        const res = await fetch('http://localhost:5000/api/v1/products/categories');
+        const res = await fetch('/api/v1/products/categories');
         const result = await res.json();
         if (result.success) {
           setCategories(result.data);
@@ -101,7 +101,7 @@ export default function AdminProductsPage() {
     };
 
     try {
-      const res = await fetch('http://localhost:5000/api/v1/admin/products', {
+      const res = await fetch('/api/v1/admin/products', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -135,7 +135,7 @@ export default function AdminProductsPage() {
   const handleDeleteProduct = async (prodId: string) => {
     if (!confirm('Are you sure you want to soft delete this product?')) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/v1/admin/products/${prodId}`, {
+      const res = await fetch(`/api/v1/admin/products/${prodId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${adminToken}`

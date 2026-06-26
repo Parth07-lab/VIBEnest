@@ -26,7 +26,7 @@ export default function AdminCouponsPage() {
   const fetchCoupons = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/v1/admin/coupons', {
+      const res = await fetch('/api/v1/admin/coupons', {
         headers: {
           'Authorization': `Bearer ${adminToken}`
         }
@@ -68,7 +68,7 @@ export default function AdminCouponsPage() {
     };
 
     try {
-      const res = await fetch('http://localhost:5000/api/v1/admin/coupons', {
+      const res = await fetch('/api/v1/admin/coupons', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

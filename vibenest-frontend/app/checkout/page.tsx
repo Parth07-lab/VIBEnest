@@ -94,7 +94,7 @@ export default function CheckoutPage() {
         return;
       }
 
-      const res = await fetch('http://localhost:5000/api/v1/orders/checkout', {
+      const res = await fetch('/api/v1/orders/checkout', {
         method: 'POST',
         headers,
         body: JSON.stringify(payload)

@@ -53,7 +53,7 @@ export default function CategoryPage() {
       try {
         let url = '';
         if (isSearchPage) {
-          url = `http://localhost:5000/api/v1/products/search?q=${searchQuery}`;
+          url = `/api/v1/products/search?q=${searchQuery}`;
         } else {
           const queryParts = [];
           if (categorySlug) queryParts.push(`category=${categorySlug}`);
@@ -65,7 +65,7 @@ export default function CategoryPage() {
           queryParts.push(`page=${page}`);
           queryParts.push(`limit=12`);
 
-          url = `http://localhost:5000/api/v1/products?${queryParts.join('&')}`;
+          url = `/api/v1/products?${queryParts.join('&')}`;
         }
 
         const res = await fetch(url);

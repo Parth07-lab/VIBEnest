@@ -32,7 +32,7 @@ export default function ProductDetailPage() {
     async function fetchProductDetails() {
       setLoading(true);
       try {
-        const res = await fetch(`http://localhost:5000/api/v1/products/${slug}`);
+        const res = await fetch(`/api/v1/products/${slug}`);
         const result = await res.json();
         if (result.success) {
           const prod: Product = result.data;
@@ -49,7 +49,7 @@ export default function ProductDetailPage() {
           }
 
           // Fetch related products
-          const relatedRes = await fetch(`http://localhost:5000/api/v1/products?limit=4`);
+          const relatedRes = await fetch(`/api/v1/products?limit=4`);
           const relatedResult = await relatedRes.json();
           if (relatedResult.success) {
             setRelatedProducts(relatedResult.data.filter((p: Product) => p.slug !== slug));
