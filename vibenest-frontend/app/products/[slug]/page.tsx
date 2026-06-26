@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Star, ShoppingBag, Heart, Check, RefreshCw, Truck, HelpCircle } from 'lucide-react';
-import { Product, ProductVariant, ProductImage } from '../../types/shared-types';
+import { Product, ProductVariant, ProductImage } from '../../../types/shared-types';
 import { useCartStore } from '../../../store/useCartStore';
 import { useWishlistStore } from '../../../store/useWishlistStore';
 

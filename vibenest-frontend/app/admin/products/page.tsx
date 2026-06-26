@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuthStore } from '../../../store/useAuthStore';
 import { Package, Plus, Trash2, Search, X, Edit2 } from 'lucide-react';
-import { Product, Category } from '../../types/shared-types';
+import { Product, Category } from '../../../types/shared-types';
 
 export default function AdminProductsPage() {
   const { adminToken } = useAuthStore();

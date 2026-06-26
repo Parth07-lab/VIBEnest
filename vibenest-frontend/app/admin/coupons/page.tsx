@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuthStore } from '../../../store/useAuthStore';
 import { BadgePercent, Plus, Check, RefreshCw, AlertCircle, X } from 'lucide-react';
-import { Coupon } from '../../types/shared-types';
+import { Coupon } from '../../../types/shared-types';
 
 export default function AdminCouponsPage() {
   const { adminToken } = useAuthStore();
